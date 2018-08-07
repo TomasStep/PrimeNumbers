@@ -3,15 +3,14 @@ using System.Collections.Generic;
 
 namespace PrimeNumbers
 {
-    class Program
+    internal class Program
     {
-        static void printInfo(List<int> iList)
+        private static void PrintInfo(IReadOnlyCollection<int> iList)
         {
-            string print;
             Console.WriteLine("Do you want to print all prime numbers?");
             Console.WriteLine("primeList length " + iList.Count);
             Console.WriteLine("Y/N or y/n");
-            print = Console.ReadLine();
+            var print = Console.ReadLine();
             if (print == "Y" || print == "y")
             {
                 Console.WriteLine("All Prime numbers:");
@@ -22,18 +21,14 @@ namespace PrimeNumbers
             }
             else
                 Console.WriteLine("Print aborted!");
-
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-
         }
-        static void primeNumbers(int numbers, List<int> pList)
+
+        private static void PrimeNumbers(int numbers, List<int> pList)
         {
-            int count = 0;
-            for (int i = 2; i <= numbers; i++)
+            for (var i = 2; i <= numbers; i++)
             {
-                count = 0;
-                for (int j = 2; j < numbers; j++)
+                var count = 0;
+                for (var j = 2; j < numbers; j++)
                 {
                     if (i >= j && i % j == 0)
                     {
@@ -44,21 +39,24 @@ namespace PrimeNumbers
                     pList.Add(i);
             }
         }
-        static int intro()
+
+        private static int Intro()
         {
-            int n = 0;
             Console.WriteLine("Insert a number to start prime number search\nProgram will search all prime numbers from 0 to n (your choice)");
             Console.Write("n = ");
-            n = Convert.ToInt32(Console.ReadLine());
+            var n = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine($"You entered {n}");
             return n;
         }
-        static void Main(string[] args)
+
+        private static void Main()
         {
-            int number = intro();
+            int number = Intro();
             List<int> primeList = new List<int>();
-            primeNumbers(number, primeList);
-            printInfo(primeList);
+            PrimeNumbers(number, primeList);
+            PrintInfo(primeList);
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
     }
 }
